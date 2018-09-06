@@ -6,6 +6,32 @@
 
 	<!-- jQuery library -->
 	<script src="/js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#submit").click(function(){
+				var obj = {};
+				obj.full_name = $("#full_name").val();
+				obj.username = $("#username").val();
+				obj.password = $("#password").val();
+				obj.address = $("#address").val();
+				obj.city = $("#city").val();
+				if($("#male").is(":checked")==true){
+					obj.gender = "male";
+				}
+				if($("#female").is(":checked")==true){
+					obj.gender = "female";
+				}
+				$.ajax({
+					url : "/signup",
+					type : "post",
+					data : obj,
+					success : function(res){
+						console.log(res);
+					}
+				})
+			});
+		});
+	</script>
 
 	<!-- Latest compiled JavaScript -->
 	<script src="/js/bootstrap.min.js"></script>
@@ -48,7 +74,7 @@
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2018 Copyright:
-    <a href="https://mdbootstrap.com/bootstrap-tutorial/"> MDBootstrap.com</a>
+    <a href="#"> The Stepping Stone </a>
   </div>
   <!-- Copyright -->
 
@@ -61,26 +87,47 @@
 				<h2>User Signup</h2>
 			</div>
 			<div class="modal-body">
-				<form action="/signup" method="post">
+				<!-- <form action="/signup" method="post"> -->
 					<div class="form-group">
 						<label>Full Name</label>
-						<input type="text" placeholder="Full NAme" class="form-control" name="full_name">
+						<input type="text" placeholder="Full NAme" class="form-control" id="full_name" name="full_name">
 					</div>
 					<div class="form-group">
 						<label>Username</label>
-						<input type="text" placeholder="Username" class="form-control" name="username">
+						<input type="text" placeholder="Username" class="form-control" id="username" name="username">
+					</div>
+					<div class="form-group">
+						<label>Password</label>
+						<input type="text" placeholder="Password" class="form-control" id="password" name="password">
+					</div>
+					<div class="form-group">
+						<label>Re-Password</label>
+						<input type="text" placeholder="Re-Password" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>Address</label>
-						<textarea class="form-control" name="add"></textarea>
+						<textarea class="form-control" name="address" id="address"></textarea>
 					</div>
+					<div class="form-group">
+						<label>City</label>
+						<select class="form-control" name="city" id="city">
+							<option>Select</option>
+							<option>Indore</option>
+							<option>Mumbai</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Gender</label>
+						Male<input type="radio" name="gender" value="male" id="male">Female<input type="radio" name="gender" value="female" id="female">
+					</div>
+
 
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-danger" data-dismiss="modal">Close</button>
-				<button class="btn btn-success" type="submit">Submit</button>
+				<button class="btn btn-success" type="button" id="submit">Submit</button>
 			</div>
-				</form>
+				<!-- </form> -->
 		</div>
 	</div>
 </div>
